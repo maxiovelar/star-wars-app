@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./navigation.module.css";
+import styles from "./navigation.module.scss";
 import cx from "classnames";
 import { PlanetsIcon } from "./icons/planets-icon";
 import { SpaceShipIcon } from "./icons/space-ship-icon";
@@ -10,7 +10,7 @@ import { SpeciesIcon } from "./icons/species-icon";
 import Link from "next/link";
 import { ArrowRightIcon } from "./icons/arrow-right-icon";
 import { useViewportWidth } from "@/hooks/useViewportWidth";
-import { Container } from "./container";
+import { DarkThemeIcon } from "./icons/dark-theme-icon";
 
 const categories = [
   {
@@ -48,17 +48,15 @@ const categories = [
 const MobileNavigation = () => {
   return (
     <nav className={styles.mobile}>
-      <Container>
-        <ul>
-          {categories.map((category) => (
-            <li key={category.name}>
-              <Link href={category.href} title={category.name}>
-                {category.icon}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </Container>
+      <ul>
+        {categories.map((category) => (
+          <li key={category.name}>
+            <Link href={category.href} title={category.name}>
+              {category.icon}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </nav>
   );
 };
@@ -80,9 +78,17 @@ const DesktopNavigation = () => {
           </li>
         ))}
       </ul>
-      <button onClick={handleExpand} title={isExpanded ? "Collapse" : "Expand"}>
-        <ArrowRightIcon height={25} width={25} />
-      </button>
+      <div className={styles.desktop__button_container}>
+        <button title="Toggle Dark Mode">
+          <DarkThemeIcon height={25} width={25} />
+        </button>
+        <button
+          onClick={handleExpand}
+          title={isExpanded ? "Collapse" : "Expand"}
+        >
+          <ArrowRightIcon height={25} width={25} />
+        </button>
+      </div>
     </nav>
   );
 };

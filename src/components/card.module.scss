@@ -1,0 +1,31 @@
+.card {
+  background-color: #fcfcfc;
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300px;
+  width: 250px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card div {
+  height: 200px;
+  overflow: hidden;
+}
+
+.card image {
+  object-fit: cover;
+}
+
+.card section {
+  padding: 10px;
+}
+
+.card section p {
+  text-transform: uppercase;
+}

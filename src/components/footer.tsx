@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./footer.module.css";
+import styles from "./footer.module.scss";
 import { LinkedinIcon } from "./icons/linkedin-icon";
 import { GithubIcon } from "./icons/github-icon";
 

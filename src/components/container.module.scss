@@ -1,0 +1,30 @@
+.container {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  flex-grow: 1;
+}
+
+@media (min-width: 540px) {
+  .container {
+    width: 520px;
+  }
+}
+
+@media (min-width: 820px) {
+  .container {
+    width: 790px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    width: 1060px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    width: 1330px;
+  }
+}

@@ -1,3 +1,8 @@
+@function rem($value) {
+  $remValue: ($value / 16) + rem;
+  @return $remValue;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -11,6 +16,16 @@ body {
   overflow-x: hidden;
   background-color: #f3f6fc;
   font-family: "Titillium Web", sans-serif;
+}
+
+.grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  place-content: center;
+  height: 100%;
+  width: 100%;
+  padding: 50px 0px;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -1,5 +1,7 @@
 .footer {
   background-color: #fcfcfc;
+  color: #383838;
+  font-size: 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +17,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 6px;
+  gap: 14px;
+}
+
+.footer > p:nth-child(2) > a {
+  color: #383838;
+}
+
+.footer div a svg {
+  fill: #383838;
 }
 
 @media (max-width: 1024px) {

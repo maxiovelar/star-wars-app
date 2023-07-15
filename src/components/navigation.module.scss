@@ -1,5 +1,5 @@
 .desktop {
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 40px 0px;
@@ -10,7 +10,6 @@
   left: 0;
   top: 0;
   transition: width 0.3s;
-  cursor: pointer;
   overflow: hidden;
   box-shadow: 5px 0px 15px -3px rgba(0, 0, 0, 0.1);
 }
@@ -30,10 +29,6 @@
   align-items: start;
 }
 
-.desktop.expanded button {
-  transform: rotate(180deg);
-}
-
 .desktop ul li {
   padding: 15px 10px;
 }
@@ -44,6 +39,17 @@
   gap: 20px;
   text-decoration: none;
   color: #333;
+  cursor: pointer;
+}
+
+.desktop__button_container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.desktop.expanded .desktop__button_container button:nth-child(2) {
+  transform: rotate(180deg);
 }
 
 .desktop button {
@@ -78,18 +84,9 @@
 
 .mobile ul {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 25px;
   padding-top: 0;
   list-style-type: none;
-}
-
-@media (min-width: 1024px) {
-  .desktop {
-    display: flex;
-  }
-
-  .mobile {
-    display: none;
-  }
 }
