@@ -15,7 +15,7 @@ export const Card = ({ image, children }: CardProps) => {
       <div className={styles["card__image-wrapper"]}>
         <Image
           src={image ?? starwarsLogo}
-          alt={`image`}
+          alt="card image"
           width={250}
           height={250}
           className={styles.card__image}

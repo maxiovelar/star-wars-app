@@ -3,6 +3,7 @@ import { Layout } from "@/components/layout";
 import axios from "axios";
 import { Card } from "@/components/card";
 import { getImagePath } from "@/utils/helpers";
+import { Container } from "@/components/container";
 
 const imageBasePath = "/assets/vehicles/";
 
@@ -39,13 +40,19 @@ const VehiclesPage = ({ data }: QueryResponse) => {
 
   return (
     <Layout>
-      <section className="grid">
-        {vehicleList.map((item) => (
-          <Card key={item.name} image={getImagePath(item.name, imageBasePath)}>
-            <VehicleInfo item={item} />
-          </Card>
-        ))}
-      </section>
+      <Container>
+        <h1>Vehicles</h1>
+        <section className="grid">
+          {vehicleList.map((item) => (
+            <Card
+              key={item.name}
+              image={getImagePath(item.name, imageBasePath)}
+            >
+              <VehicleInfo item={item} />
+            </Card>
+          ))}
+        </section>
+      </Container>
     </Layout>
   );
 };

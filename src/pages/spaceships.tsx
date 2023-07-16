@@ -3,6 +3,7 @@ import { Layout } from "@/components/layout";
 import axios from "axios";
 import { Card } from "@/components/card";
 import { getImagePath } from "@/utils/helpers";
+import { Container } from "@/components/container";
 
 const imageBasePath = "/assets/spaceships/";
 
@@ -40,13 +41,19 @@ const SpaceshipsPage = ({ data }: QueryResponse) => {
 
   return (
     <Layout>
-      <section className="grid">
-        {spaceshipList.map((item) => (
-          <Card key={item.name} image={getImagePath(item.name, imageBasePath)}>
-            <SpaceshipInfo item={item} />
-          </Card>
-        ))}
-      </section>
+      <Container>
+        <h1>Spaceships</h1>
+        <section className="grid">
+          {spaceshipList.map((item) => (
+            <Card
+              key={item.name}
+              image={getImagePath(item.name, imageBasePath)}
+            >
+              <SpaceshipInfo item={item} />
+            </Card>
+          ))}
+        </section>
+      </Container>
     </Layout>
   );
 };

@@ -18,6 +18,15 @@ body {
   font-family: "Titillium Web", sans-serif;
 }
 
+h1 {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: -40px;
+  font-size: 36px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
 .grid {
   display: grid;
   gap: 20px;
@@ -25,11 +34,11 @@ body {
   place-content: center;
   height: 100%;
   width: 100%;
-  padding: 50px 0px;
+  padding: 50px 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@media (min-width: 1024px) {
+  h1 {
+    display: none;
   }
 }

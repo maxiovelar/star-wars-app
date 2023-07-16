@@ -1,5 +1,8 @@
 import Head from "next/head";
 import { Layout } from "@/components/layout";
+import Image from "next/image";
+
+const banner = "/assets/home-banner.jpg";
 
 export default function Home() {
   return (
@@ -14,8 +17,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        {/* <CardList list={planetsExample} /> */}
-        Holaaaaaaa
+        <Image src={banner} alt="home banner" width={1920} height={1080} />
       </Layout>
     </>
   );

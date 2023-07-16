@@ -11,6 +11,7 @@ import Link from "next/link";
 import { ArrowRightIcon } from "./icons/arrow-right-icon";
 import { useViewportWidth } from "@/hooks/useViewportWidth";
 import { DarkThemeIcon } from "./icons/dark-theme-icon";
+import { useStore } from "@/hooks/useStore";
 
 const categories = [
   {
@@ -62,10 +63,12 @@ const MobileNavigation = () => {
 };
 
 const DesktopNavigation = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const { isExpanded, setIsExpanded } = useStore();
   const handleExpand = () => {
     setIsExpanded(!isExpanded);
   };
+
+  console.log(isExpanded);
   return (
     <nav
       className={cx(styles.desktop, {

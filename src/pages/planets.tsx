@@ -4,6 +4,7 @@ import { Layout } from "@/components/layout";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Card } from "@/components/card";
 import { getImagePath } from "@/utils/helpers";
+import { Container } from "@/components/container";
 
 const imageBasePath = "/assets/planets/";
 
@@ -91,13 +92,19 @@ const PlanetsPage = ({ data }: QueryResponse) => {
       {/* <CardList list={planetList} /> */}
       {/* </InfiniteScroll> */}
 
-      <section className="grid">
-        {planetList.map((item) => (
-          <Card key={item.name} image={getImagePath(item.name, imageBasePath)}>
-            <PlanetInfo item={item} />
-          </Card>
-        ))}
-      </section>
+      <Container>
+        <h1>Planets</h1>
+        <section className="grid">
+          {planetList.map((item) => (
+            <Card
+              key={item.name}
+              image={getImagePath(item.name, imageBasePath)}
+            >
+              <PlanetInfo item={item} />
+            </Card>
+          ))}
+        </section>
+      </Container>
     </Layout>
   );
 };
