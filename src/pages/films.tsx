@@ -2,6 +2,9 @@ import React from "react";
 import { Layout } from "@/components/layout";
 import axios from "axios";
 import { Card } from "@/components/card";
+import { getImagePath } from "@/utils/helpers";
+
+const imageBasePath = "/assets/films/";
 
 interface Film {
   title: string;
@@ -26,11 +29,9 @@ interface FilmInfoProps {
 
 const FilmInfo = ({ item }: FilmInfoProps) => {
   return (
-    <section>
-      <p>
-        <b>{item.title}</b>
-      </p>
-    </section>
+    <p>
+      <b>{item.title}</b>
+    </p>
   );
 };
 
@@ -41,7 +42,10 @@ const FilmsPage = ({ data }: QueryResponse) => {
     <Layout>
       <section className="grid">
         {filmList.map((item) => (
-          <Card key={item.title}>
+          <Card
+            key={item.title}
+            image={getImagePath(item.title, imageBasePath)}
+          >
             <FilmInfo item={item} />
           </Card>
         ))}

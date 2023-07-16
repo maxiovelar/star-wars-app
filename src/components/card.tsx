@@ -2,25 +2,26 @@ import React from "react";
 import styles from "./card.module.scss";
 import Image from "next/image";
 
-import planet1 from "../../public/assets/tatooine.webp";
+import starwarsLogo from "../../public/assets/starwars.png";
 
 interface CardProps {
+  image?: string;
   children: React.ReactNode;
 }
 
-export const Card = ({ children }: CardProps) => {
+export const Card = ({ image, children }: CardProps) => {
   return (
     <article className={styles.card}>
       <div className={styles["card__image-wrapper"]}>
         <Image
-          src={planet1}
+          src={image ?? starwarsLogo}
           alt={`image`}
           width={250}
           height={250}
           className={styles.card__image}
         />
       </div>
-      {children}
+      <section className={styles.card__content}>{children}</section>
     </article>
   );
 };

@@ -2,6 +2,9 @@ import React from "react";
 import { Layout } from "@/components/layout";
 import axios from "axios";
 import { Card } from "@/components/card";
+import { getImagePath } from "@/utils/helpers";
+
+const imageBasePath = "/assets/people/";
 
 interface Person {
   name: string;
@@ -26,11 +29,9 @@ interface PersonInfoProps {
 
 const PersonInfo = ({ item }: PersonInfoProps) => {
   return (
-    <section>
-      <p>
-        <b>{item.name}</b>
-      </p>
-    </section>
+    <p>
+      <b>{item.name}</b>
+    </p>
   );
 };
 
@@ -41,7 +42,7 @@ const PeoplePage = ({ data }: QueryResponse) => {
     <Layout>
       <section className="grid">
         {peopleList.map((item) => (
-          <Card key={item.name}>
+          <Card key={item.name} image={getImagePath(item.name, imageBasePath)}>
             <PersonInfo item={item} />
           </Card>
         ))}
