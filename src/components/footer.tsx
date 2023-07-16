@@ -6,7 +6,7 @@ import { GithubIcon } from "./icons/github-icon";
 export const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <div>
+      <section className={styles.footer__social}>
         <p>
           Designed and built by <b>Maxi Ovelar</b>
         </p>
@@ -15,19 +15,32 @@ export const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <LinkedinIcon height={24} width={24} fill="#000000" />
+          <LinkedinIcon
+            height={24}
+            width={24}
+            className={styles["footer__social--icon-color"]}
+          />
         </a>
         <a
           href="https://github.com/maxiovelar"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <GithubIcon height={24} width={24} fill="#000000" />
+          <GithubIcon
+            height={24}
+            width={24}
+            className={styles["footer__social--icon-color"]}
+          />
         </a>
-      </div>
+      </section>
       <p>
         Powered by &nbsp;
-        <a href="https://swapi.dev/" target="_blank" rel="noreferrer">
+        <a
+          href="https://swapi.dev/"
+          target="_blank"
+          rel="noreferrer"
+          className={styles.footer__link}
+        >
           swapi.dev
         </a>
       </p>

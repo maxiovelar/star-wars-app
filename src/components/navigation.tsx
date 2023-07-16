@@ -48,7 +48,7 @@ const categories = [
 const MobileNavigation = () => {
   return (
     <nav className={styles.mobile}>
-      <ul>
+      <ul className={styles.mobile__list}>
         {categories.map((category) => (
           <li key={category.name}>
             <Link href={category.href} title={category.name}>
@@ -67,23 +67,36 @@ const DesktopNavigation = () => {
     setIsExpanded(!isExpanded);
   };
   return (
-    <nav className={cx(styles.desktop, { [styles.expanded]: isExpanded })}>
-      <ul>
+    <nav
+      className={cx(styles.desktop, {
+        [styles["desktop--expanded"]]: isExpanded,
+      })}
+    >
+      <ul
+        className={cx(styles.desktop__list, styles["desktop__list--expanded"])}
+      >
         {categories.map((category) => (
-          <li key={category.name}>
-            <Link href={category.href} title={category.name}>
+          <li key={category.name} className={styles["list-item"]}>
+            <Link
+              href={category.href}
+              title={category.name}
+              className={styles["list-item__link"]}
+            >
               {category.icon}
               {isExpanded && category.name}
             </Link>
           </li>
         ))}
       </ul>
-      <div className={styles.desktop__button_container}>
-        <button title="Toggle Dark Mode">
+      <div className={styles["desktop__button-container"]}>
+        <button className={styles.button} title="Toggle Dark Mode">
           <DarkThemeIcon height={25} width={25} />
         </button>
         <button
           onClick={handleExpand}
+          className={cx(styles.button, {
+            [styles["button--expanded"]]: isExpanded,
+          })}
           title={isExpanded ? "Collapse" : "Expand"}
         >
           <ArrowRightIcon height={25} width={25} />

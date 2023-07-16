@@ -11,21 +11,21 @@
   box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.1);
   margin-left: auto;
   margin-right: auto;
-}
 
-.card div {
-  height: 200px;
-  overflow: hidden;
-}
+  &__image-wrapper {
+    height: 200px;
+    overflow: hidden;
+  }
 
-.card image {
-  object-fit: cover;
-}
+  &__image {
+    object-fit: cover;
+  }
 
-.card section {
-  padding: 10px;
-}
+  & section {
+    padding: 10px;
+  }
 
-.card section p {
-  text-transform: uppercase;
+  & p {
+    text-transform: uppercase;
+  }
 }
