@@ -63,9 +63,15 @@ const MobileNavigation = () => {
 };
 
 const DesktopNavigation = () => {
-  const { isExpanded, setIsExpanded } = useStore();
+  const { isExpanded, setIsExpanded, setIsLoading, theme } =
+    useStore();
+
   const handleExpand = () => {
     setIsExpanded(!isExpanded);
+  };
+
+  const handleLoading = () => {
+    setIsLoading(true);
   };
 
   return (
@@ -82,6 +88,7 @@ const DesktopNavigation = () => {
             <Link
               href={category.href}
               title={category.name}
+              onClick={handleLoading}
               className={styles["list-item__link"]}
             >
               {category.icon}

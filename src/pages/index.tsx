@@ -1,10 +1,12 @@
+import { Loader } from "@/components/loader";
+import { useStore } from "@/hooks/useStore";
 import Head from "next/head";
-import { Layout } from "@/components/layout";
 import Image from "next/image";
 
 const banner = "/assets/home-banner.jpg";
 
 export default function Home() {
+  const { isLoading } = useStore();
   return (
     <>
       <Head>
@@ -16,7 +18,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout>
+      {isLoading ? (
+        <Loader />
+      ) : (
         <Image
           src={banner}
           alt="home banner"
@@ -24,7 +28,7 @@ export default function Home() {
           height={1080}
           style={{ height: "100%", width: "100%", objectFit: "cover" }}
         />
-      </Layout>
+      )}
     </>
   );
 }

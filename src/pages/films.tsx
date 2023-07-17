@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Layout } from "@/components/layout";
 import axios from "axios";
 import { Card } from "@/components/card";
 import { getImagePath } from "@/utils/helpers";
@@ -52,22 +51,20 @@ const FilmsPage = ({ data }: QueryResponse) => {
   }, [page]);
 
   return (
-    <Layout>
-      <Container>
-        <h1>Films</h1>
-        <section className="grid">
-          {filmList.map((item) => (
-            <Card
-              key={item.title}
-              image={getImagePath(item.title, imageBasePath)}
-            >
-              <FilmInfo item={item} />
-            </Card>
-          ))}
-        </section>
-        <Pagination count={data.count} page={page} setPage={setPage} />
-      </Container>
-    </Layout>
+    <Container>
+      <h1>Films</h1>
+      <section className="grid">
+        {filmList.map((item) => (
+          <Card
+            key={item.title}
+            image={getImagePath(item.title, imageBasePath)}
+          >
+            <FilmInfo item={item} />
+          </Card>
+        ))}
+      </section>
+      <Pagination count={data.count} page={page} setPage={setPage} />
+    </Container>
   );
 };
 

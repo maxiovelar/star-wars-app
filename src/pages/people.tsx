@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Layout } from "@/components/layout";
 import axios from "axios";
 import { Card } from "@/components/card";
 import { getImagePath } from "@/utils/helpers";
@@ -49,25 +48,25 @@ const PeoplePage = ({ data }: QueryResponse) => {
       setPeopleList(data.results);
     };
     getNextPage();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   return (
-    <Layout>
-      <Container>
-        <h1>People</h1>
-        <section className="grid">
-          {peopleList.map((item) => (
-            <Card
-              key={item.name}
-              image={getImagePath(item.name, imageBasePath)}
-            >
-              <PersonInfo item={item} />
-            </Card>
-          ))}
-        </section>
-        <Pagination count={data.count} page={page} setPage={setPage} />
-      </Container>
-    </Layout>
+    <Container>
+      <h1>People</h1>
+      <section className="grid">
+        {peopleList.map((item, index) => (
+          <Card
+            key={`${index}-${item.name}`}
+            image={getImagePath(item.name, imageBasePath)}
+          >
+            <PersonInfo item={item} />
+          </Card>
+        ))}
+      </section>
+      <Pagination count={data.count} page={page} setPage={setPage} />
+    </Container>
   );
 };
 

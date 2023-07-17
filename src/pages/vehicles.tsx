@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Layout } from "@/components/layout";
 import axios from "axios";
 import { Card } from "@/components/card";
 import { getImagePath } from "@/utils/helpers";
@@ -51,22 +50,17 @@ const VehiclesPage = ({ data }: QueryResponse) => {
   }, [page]);
 
   return (
-    <Layout>
-      <Container>
-        <h1>Vehicles</h1>
-        <section className="grid">
-          {vehicleList.map((item) => (
-            <Card
-              key={item.name}
-              image={getImagePath(item.name, imageBasePath)}
-            >
-              <VehicleInfo item={item} />
-            </Card>
-          ))}
-        </section>
-        <Pagination count={data.count} page={page} setPage={setPage} />
-      </Container>
-    </Layout>
+    <Container>
+      <h1>Vehicles</h1>
+      <section className="grid">
+        {vehicleList.map((item) => (
+          <Card key={item.name} image={getImagePath(item.name, imageBasePath)}>
+            <VehicleInfo item={item} />
+          </Card>
+        ))}
+      </section>
+      <Pagination count={data.count} page={page} setPage={setPage} />
+    </Container>
   );
 };
 

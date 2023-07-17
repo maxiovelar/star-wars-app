@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Layout } from "@/components/layout";
 import axios from "axios";
 import { Card } from "@/components/card";
 import { getImagePath } from "@/utils/helpers";
 import { Container } from "@/components/container";
 import { Pagination } from "@/components/pagination";
+import { useStore } from "@/hooks/useStore";
+import { Loader } from "@/components/loader";
 
 const imageBasePath = "/assets/spaceships/";
 
@@ -40,6 +41,12 @@ const SpaceshipInfo = ({ item }: SpaceshipInfoProps) => {
 const SpaceshipsPage = ({ data }: QueryResponse) => {
   const [spaceshipList, setSpaceshipList] = useState(data.results);
   const [page, setPage] = useState(1);
+  const { isLoading, setIsLoading } = useStore();
+
+  // useEffect(() => {
+  //   setIsLoading(false);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   useEffect(() => {
     const getNextPage = async () => {
@@ -52,21 +59,25 @@ const SpaceshipsPage = ({ data }: QueryResponse) => {
   }, [page]);
 
   return (
-    <Layout>
-      <Container>
-        <section className="grid">
-          {spaceshipList.map((item) => (
-            <Card
-              key={item.name}
-              image={getImagePath(item.name, imageBasePath)}
-            >
-              <SpaceshipInfo item={item} />
-            </Card>
-          ))}
-        </section>
-        <Pagination count={data.count} page={page} setPage={setPage} />
-      </Container>
-    </Layout>
+    <Container>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <section className="grid">
+            {spaceshipList.map((item) => (
+              <Card
+                key={item.name}
+                image={getImagePath(item.name, imageBasePath)}
+              >
+                <SpaceshipInfo item={item} />
+              </Card>
+            ))}
+          </section>
+          <Pagination count={data.count} page={page} setPage={setPage} />
+        </>
+      )}
+    </Container>
   );
 };
 
