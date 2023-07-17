@@ -68,7 +68,6 @@ const DesktopNavigation = () => {
     setIsExpanded(!isExpanded);
   };
 
-  console.log(isExpanded);
   return (
     <nav
       className={cx(styles.desktop, {

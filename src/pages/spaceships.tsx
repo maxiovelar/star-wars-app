@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Layout } from "@/components/layout";
 import axios from "axios";
 import { Card } from "@/components/card";
 import { getImagePath } from "@/utils/helpers";
 import { Container } from "@/components/container";
+import { Pagination } from "@/components/pagination";
 
 const imageBasePath = "/assets/spaceships/";
 
@@ -37,12 +38,22 @@ const SpaceshipInfo = ({ item }: SpaceshipInfoProps) => {
 };
 
 const SpaceshipsPage = ({ data }: QueryResponse) => {
-  const spaceshipList = data.results;
+  const [spaceshipList, setSpaceshipList] = useState(data.results);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    const getNextPage = async () => {
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}starships?page=${page}`
+      );
+      setSpaceshipList(data.results);
+    };
+    getNextPage();
+  }, [page]);
 
   return (
     <Layout>
       <Container>
-        <h1>Spaceships</h1>
         <section className="grid">
           {spaceshipList.map((item) => (
             <Card
@@ -53,6 +64,7 @@ const SpaceshipsPage = ({ data }: QueryResponse) => {
             </Card>
           ))}
         </section>
+        <Pagination count={data.count} page={page} setPage={setPage} />
       </Container>
     </Layout>
   );

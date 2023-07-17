@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Layout } from "@/components/layout";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { Card } from "@/components/card";
 import { getImagePath } from "@/utils/helpers";
 import { Container } from "@/components/container";
+import { Pagination } from "@/components/pagination";
 
 const imageBasePath = "/assets/planets/";
 
@@ -40,70 +40,34 @@ const PlanetInfo = ({ item }: PlanetInfoProps) => {
 };
 
 const PlanetsPage = ({ data }: QueryResponse) => {
-  const planetList = data.results;
-  // const [planetList, setPlanetList] = useState(planets.results);
-  // const [page, setPage] = useState(1);
+  const [planetList, setPlanetList] = useState(data.results);
+  const [page, setPage] = useState(1);
 
-  // const handleScroll = () => {
-  //   if (
-  //     window.innerHeight + Math.ceil(window.scrollY) >=
-  //     document.body.offsetHeight - 500
-  //   ) {
-  //     setPage(page + 1);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //   const getMorePlanets = async () => {
-  //     const { data } = await axios.get(
-  //       `${process.env.NEXT_PUBLIC_API_URL}/planets?page=${page}`
-  //     );
-  //     setPlanetList((prev) => [...prev, ...data.results]);
-  //   };
-  //   getMorePlanets();
-  // }, [page]);
+  useEffect(() => {
+    const getNextPage = async () => {
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}planets?page=${page}`
+      );
+      setPlanetList(data.results);
+    };
+    getNextPage();
+  }, [page]);
 
   return (
     <Layout>
-      {/* <InfiniteScroll
-        dataLength={planetList.length}
-        next={() => setPage((prevPage) => prevPage + 1)}
-        hasMore={true}
-        loader={<h4>Loading...</h4>}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-      > */}
-      {/* {
-          planetList.map((planet) => (
-            <Card key={planet.name} item={planet} />
-          ))
-          // <CardList list={planetList} />)
-        } */}
-      {/* <CardList list={planetList} /> */}
-      {/* </InfiniteScroll> */}
-
       <Container>
         <h1>Planets</h1>
         <section className="grid">
-          {planetList.map((item) => (
+          {planetList.map((item, index) => (
             <Card
-              key={item.name}
+              key={`${index}-${item.name}`}
               image={getImagePath(item.name, imageBasePath)}
             >
               <PlanetInfo item={item} />
             </Card>
           ))}
         </section>
+        <Pagination count={data.count} page={page} setPage={setPage} />
       </Container>
     </Layout>
   );
@@ -111,7 +75,7 @@ const PlanetsPage = ({ data }: QueryResponse) => {
 
 export async function getServerSideProps() {
   const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/planets?page=1`
+    `${process.env.NEXT_PUBLIC_API_URL}/planets`
   );
 
   return { props: { data } };

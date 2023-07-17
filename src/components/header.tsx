@@ -7,7 +7,7 @@ export const Header = () => {
   return (
     <div className={styles.header}>
       <Link href="/" title="Home">
-        <StarWarsIcon height={100} width={200} />
+        <StarWarsIcon className={styles.header__icon} />
       </Link>
     </div>
   );

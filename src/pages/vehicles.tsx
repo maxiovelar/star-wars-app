@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Layout } from "@/components/layout";
 import axios from "axios";
 import { Card } from "@/components/card";
 import { getImagePath } from "@/utils/helpers";
 import { Container } from "@/components/container";
+import { Pagination } from "@/components/pagination";
 
 const imageBasePath = "/assets/vehicles/";
 
@@ -36,7 +37,18 @@ const VehicleInfo = ({ item }: VehicleInfoProps) => {
 };
 
 const VehiclesPage = ({ data }: QueryResponse) => {
-  const vehicleList = data.results;
+  const [vehicleList, setVehicleList] = useState(data.results);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    const getNextPage = async () => {
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}vehicles?page=${page}`
+      );
+      setVehicleList(data.results);
+    };
+    getNextPage();
+  }, [page]);
 
   return (
     <Layout>
@@ -52,6 +64,7 @@ const VehiclesPage = ({ data }: QueryResponse) => {
             </Card>
           ))}
         </section>
+        <Pagination count={data.count} page={page} setPage={setPage} />
       </Container>
     </Layout>
   );

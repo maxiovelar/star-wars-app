@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Layout } from "@/components/layout";
 import axios from "axios";
 import { Card } from "@/components/card";
 import { getImagePath } from "@/utils/helpers";
 import { Container } from "@/components/container";
+import { Pagination } from "@/components/pagination";
 
 const imageBasePath = "/assets/species/";
 
@@ -37,7 +38,18 @@ const SpeciesInfo = ({ item }: SpeciesInfoProps) => {
 };
 
 const SpeciesPage = ({ data }: QueryResponse) => {
-  const speciesList = data.results;
+  const [speciesList, setPeopleList] = useState(data.results);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    const getNextPage = async () => {
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}species?page=${page}`
+      );
+      setPeopleList(data.results);
+    };
+    getNextPage();
+  }, [page]);
 
   return (
     <Layout>
@@ -53,6 +65,7 @@ const SpeciesPage = ({ data }: QueryResponse) => {
             </Card>
           ))}
         </section>
+        <Pagination count={data.count} page={page} setPage={setPage} />
       </Container>
     </Layout>
   );

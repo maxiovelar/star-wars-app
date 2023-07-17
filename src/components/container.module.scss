@@ -1,8 +1,8 @@
 .container {
-  width: fit-content;
+  width: 90vw;
+  flex-grow: 1;
   margin-left: auto;
   margin-right: auto;
-  flex-grow: 1;
 }
 
 @media (min-width: 540px) {

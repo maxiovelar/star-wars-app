@@ -17,7 +17,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <Image src={banner} alt="home banner" width={1920} height={1080} />
+        <Image
+          src={banner}
+          alt="home banner"
+          width={1920}
+          height={1080}
+          style={{ height: "100%", width: "100%", objectFit: "cover" }}
+        />
       </Layout>
     </>
   );

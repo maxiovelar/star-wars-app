@@ -4,4 +4,20 @@
   display: flex;
   justify-content: center;
   padding: 20px 0px;
+
+  &__icon {
+    height: 100px;
+    width: 200px;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 10px 0px;
+  }
+
+  .header__icon {
+    height: 60px;
+    width: 120px;
+  }
 }

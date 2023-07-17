@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Layout } from "@/components/layout";
 import axios from "axios";
 import { Card } from "@/components/card";
 import { getImagePath } from "@/utils/helpers";
 import { Container } from "@/components/container";
+import { Pagination } from "@/components/pagination";
 
 const imageBasePath = "/assets/films/";
 
@@ -37,7 +38,18 @@ const FilmInfo = ({ item }: FilmInfoProps) => {
 };
 
 const FilmsPage = ({ data }: QueryResponse) => {
-  const filmList = data.results;
+  const [filmList, setFilmList] = useState(data.results);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    const getNextPage = async () => {
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}films?page=${page}`
+      );
+      setFilmList(data.results);
+    };
+    getNextPage();
+  }, [page]);
 
   return (
     <Layout>
@@ -53,6 +65,7 @@ const FilmsPage = ({ data }: QueryResponse) => {
             </Card>
           ))}
         </section>
+        <Pagination count={data.count} page={page} setPage={setPage} />
       </Container>
     </Layout>
   );
