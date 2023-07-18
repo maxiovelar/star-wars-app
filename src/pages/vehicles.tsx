@@ -9,9 +9,7 @@ const imageBasePath = "/assets/vehicles/";
 
 interface Vehicle {
   name: string;
-  // model: string;
-  // manufacturer: string;
-  // passengers: string;
+  vehicle_class: string;
 }
 
 interface QueryResponse {
@@ -29,30 +27,34 @@ interface VehicleInfoProps {
 
 const VehicleInfo = ({ item }: VehicleInfoProps) => {
   return (
-    <p>
-      <b>{item.name}</b>
-    </p>
+    <>
+      <p>{item.name}</p>
+      <span>
+        <b>Class:</b> {item.vehicle_class}
+      </span>
+    </>
   );
 };
 
 const VehiclesPage = ({ data }: QueryResponse) => {
   const [vehicleList, setVehicleList] = useState(data.results);
   const [page, setPage] = useState(1);
+  const apiURL = `${process.env.NEXT_PUBLIC_API_URL}vehicles?page=${page}`;
 
   useEffect(() => {
     const getNextPage = async () => {
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}vehicles?page=${page}`
-      );
+      const { data } = await axios.get(apiURL);
       setVehicleList(data.results);
+      document.body.scrollTo({ top: 0, behavior: "smooth" });
     };
     getNextPage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   return (
     <Container>
       <h1>Vehicles</h1>
-      <section className="grid">
+      <section className="cards-grid">
         {vehicleList.map((item) => (
           <Card key={item.name} image={getImagePath(item.name, imageBasePath)}>
             <VehicleInfo item={item} />

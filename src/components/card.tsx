@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const defaultImage = "/assets/starwars.png";
 
-interface CardProps {
+export interface CardProps {
   image?: string;
   children: React.ReactNode;
 }
@@ -15,6 +15,7 @@ export const Card = ({ image = defaultImage, children }: CardProps) => {
     <article className={styles.card}>
       <div className={styles["card__image-wrapper"]}>
         <Image
+          data-testid="card-image"
           src={src}
           alt="card image"
           width={250}

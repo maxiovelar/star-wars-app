@@ -19,15 +19,18 @@ body {
 }
 
 h1 {
-  display: block;
-  margin-top: 20px;
-  margin-bottom: -40px;
+  // display: block;
+  margin: 30px auto -20px;
   font-size: 24px;
   text-transform: uppercase;
   text-align: center;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 6px 30px;
+  width: fit-content;
 }
 
-.grid {
+.cards-grid {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -36,8 +39,19 @@ h1 {
   padding: 50px 0;
 }
 
-@media (min-width: 1024px) {
-  h1 {
-    display: none;
-  }
+.home-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  place-content: center;
+  max-width: 790px;
+  padding: 50px 0;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+// @media (min-width: 1024px) {
+//   h1 {
+//     // display: none;
+//   }
+// }

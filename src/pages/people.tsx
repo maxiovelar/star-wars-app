@@ -9,10 +9,9 @@ const imageBasePath = "/assets/people/";
 
 interface Person {
   name: string;
-  // height: string;
-  // mass: string;
-  // birth_year: string;
-  // gender: string;
+  height: string;
+  mass: string;
+  gender: string;
 }
 
 interface QueryResponse {
@@ -30,22 +29,31 @@ interface PersonInfoProps {
 
 const PersonInfo = ({ item }: PersonInfoProps) => {
   return (
-    <p>
-      <b>{item.name}</b>
-    </p>
+    <div>
+      <p>{item.name}</p>
+      <span>
+        <b>Gender:</b> {item.gender}
+      </span>
+      <span>
+        <b>Height:</b> {item.height}
+      </span>
+      <span>
+        <b>Mass:</b> {item.mass}
+      </span>
+    </div>
   );
 };
 
 const PeoplePage = ({ data }: QueryResponse) => {
   const [peopleList, setPeopleList] = useState(data.results);
   const [page, setPage] = useState(1);
+  const apiURL = `${process.env.NEXT_PUBLIC_API_URL}people?page=${page}`;
 
   useEffect(() => {
     const getNextPage = async () => {
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}people?page=${page}`
-      );
+      const { data } = await axios.get(apiURL);
       setPeopleList(data.results);
+      document.body.scrollTo({ top: 0, behavior: "smooth" });
     };
     getNextPage();
 
@@ -55,7 +63,7 @@ const PeoplePage = ({ data }: QueryResponse) => {
   return (
     <Container>
       <h1>People</h1>
-      <section className="grid">
+      <section className="cards-grid">
         {peopleList.map((item, index) => (
           <Card
             key={`${index}-${item.name}`}

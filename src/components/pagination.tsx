@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./pagination.module.scss";
 import cx from "classnames";
 
-interface PaginationProps {
+export interface PaginationProps {
   count: number;
   page: number;
   setPage: (page: number) => void;
@@ -34,6 +34,7 @@ export const Pagination = ({ count = 80, page, setPage }: PaginationProps) => {
     pagesCount > 0 && (
       <div className={styles.pagination}>
         <button
+          data-testid="pagination-button-decrease"
           disabled={page === 1}
           onClick={handleDecrease}
           className={styles.pagination__button}
@@ -52,6 +53,7 @@ export const Pagination = ({ count = 80, page, setPage }: PaginationProps) => {
           </button>
         ))}
         <button
+          data-testid="pagination-button-increase"
           disabled={page === pagesCount}
           onClick={handleIncrease}
           className={styles.pagination__button}

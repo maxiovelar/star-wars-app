@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./navigation.module.scss";
 import cx from "classnames";
 import { PlanetsIcon } from "./icons/planets-icon";
@@ -9,9 +9,7 @@ import { FilmsIcon } from "./icons/films-icon";
 import { SpeciesIcon } from "./icons/species-icon";
 import Link from "next/link";
 import { ArrowRightIcon } from "./icons/arrow-right-icon";
-import { useViewportWidth } from "@/hooks/useViewportWidth";
-import { DarkThemeIcon } from "./icons/dark-theme-icon";
-import { useStore } from "@/hooks/useStore";
+import { useViewportWidth } from "../hooks/useViewportWidth";
 
 const categories = [
   {
@@ -63,19 +61,15 @@ const MobileNavigation = () => {
 };
 
 const DesktopNavigation = () => {
-  const { isExpanded, setIsExpanded, setIsLoading, theme } =
-    useStore();
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleExpand = () => {
     setIsExpanded(!isExpanded);
   };
 
-  const handleLoading = () => {
-    setIsLoading(true);
-  };
-
   return (
     <nav
+      data-testid="navigation"
       className={cx(styles.desktop, {
         [styles["desktop--expanded"]]: isExpanded,
       })}
@@ -88,7 +82,6 @@ const DesktopNavigation = () => {
             <Link
               href={category.href}
               title={category.name}
-              onClick={handleLoading}
               className={styles["list-item__link"]}
             >
               {category.icon}
@@ -98,10 +91,8 @@ const DesktopNavigation = () => {
         ))}
       </ul>
       <div className={styles["desktop__button-container"]}>
-        <button className={styles.button} title="Toggle Dark Mode">
-          <DarkThemeIcon height={25} width={25} />
-        </button>
         <button
+          data-testid="expand-button"
           onClick={handleExpand}
           className={cx(styles.button, {
             [styles["button--expanded"]]: isExpanded,

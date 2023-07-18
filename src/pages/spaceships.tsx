@@ -4,17 +4,12 @@ import { Card } from "@/components/card";
 import { getImagePath } from "@/utils/helpers";
 import { Container } from "@/components/container";
 import { Pagination } from "@/components/pagination";
-import { useStore } from "@/hooks/useStore";
-import { Loader } from "@/components/loader";
 
 const imageBasePath = "/assets/spaceships/";
 
 interface Spaceship {
   name: string;
-  // model: string;
-  // manufacturer: string;
-  // length: string;
-  // passengers: string;
+  starship_class: string;
 }
 
 interface QueryResponse {
@@ -32,51 +27,41 @@ interface SpaceshipInfoProps {
 
 const SpaceshipInfo = ({ item }: SpaceshipInfoProps) => {
   return (
-    <p>
-      <b>{item.name}</b>
-    </p>
+    <>
+      <p>{item.name}</p>
+      <span>
+        <b>Class:</b> {item.starship_class}
+      </span>
+    </>
   );
 };
 
 const SpaceshipsPage = ({ data }: QueryResponse) => {
   const [spaceshipList, setSpaceshipList] = useState(data.results);
   const [page, setPage] = useState(1);
-  const { isLoading, setIsLoading } = useStore();
-
-  // useEffect(() => {
-  //   setIsLoading(false);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  const apiURL = `${process.env.NEXT_PUBLIC_API_URL}starships?page=${page}`;
 
   useEffect(() => {
     const getNextPage = async () => {
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}starships?page=${page}`
-      );
+      const { data } = await axios.get(apiURL);
       setSpaceshipList(data.results);
+      document.body.scrollTo({ top: 0, behavior: "smooth" });
     };
     getNextPage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   return (
     <Container>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <section className="grid">
-            {spaceshipList.map((item) => (
-              <Card
-                key={item.name}
-                image={getImagePath(item.name, imageBasePath)}
-              >
-                <SpaceshipInfo item={item} />
-              </Card>
-            ))}
-          </section>
-          <Pagination count={data.count} page={page} setPage={setPage} />
-        </>
-      )}
+      <h1>Spaceships</h1>
+      <section className="cards-grid">
+        {spaceshipList.map((item) => (
+          <Card key={item.name} image={getImagePath(item.name, imageBasePath)}>
+            <SpaceshipInfo item={item} />
+          </Card>
+        ))}
+      </section>
+      <Pagination count={data.count} page={page} setPage={setPage} />
     </Container>
   );
 };

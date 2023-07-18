@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const Header = () => {
   return (
-    <div className={styles.header}>
+    <div data-testid="header" className={styles.header}>
       <Link href="/" title="Home">
         <StarWarsIcon className={styles.header__icon} />
       </Link>

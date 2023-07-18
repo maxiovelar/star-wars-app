@@ -4,7 +4,11 @@ import { Navigation } from "./navigation";
 import { Header } from "./header";
 import { Footer } from "./footer";
 
-export const Layout = ({ children }: { children: ReactNode }) => {
+export interface LayoutProps {
+  children: ReactNode;
+}
+
+export const Layout = ({ children }: LayoutProps) => {
   return (
     <main className={styles.layout}>
       <Navigation />

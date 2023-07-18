@@ -4,19 +4,14 @@ import { Card } from "@/components/card";
 import { getImagePath } from "@/utils/helpers";
 import { Container } from "@/components/container";
 import { Pagination } from "@/components/pagination";
-import { useStore } from "@/hooks/useStore";
-import { Loader } from "@/components/loader";
 
 const imageBasePath = "/assets/planets/";
 
 interface Planet {
   name: string;
-  // diameter: string;
-  // climate: string;
-  // gravity: string;
-  // terrain: string;
-  // surface_water: string;
-  // population: string;
+  diameter: string;
+  climate: string;
+  population: string;
 }
 
 interface QueryResponse {
@@ -34,52 +29,50 @@ interface PlanetInfoProps {
 
 const PlanetInfo = ({ item }: PlanetInfoProps) => {
   return (
-    <p>
-      <b>{item.name}</b>
-    </p>
+    <>
+      <p>{item.name}</p>
+      <span>
+        <b>Diameter:</b> {item.diameter}
+      </span>
+      <span>
+        <b>Climate:</b> {item.climate}
+      </span>
+      <span>
+        <b>Population:</b> {item.population}
+      </span>
+    </>
   );
 };
 
 const PlanetsPage = ({ data }: QueryResponse) => {
   const [planetList, setPlanetList] = useState(data.results);
   const [page, setPage] = useState(1);
-  const { isLoading, setIsLoading } = useStore();
-
-  useEffect(() => {
-    setIsLoading(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const apiURL = `${process.env.NEXT_PUBLIC_API_URL}planets?page=${page}`;
 
   useEffect(() => {
     const getNextPage = async () => {
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}planets?page=${page}`
-      );
+      const { data } = await axios.get(apiURL);
       setPlanetList(data.results);
+      document.body.scrollTo({ top: 0, behavior: "smooth" });
     };
     getNextPage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   return (
     <Container>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <h1>Planets</h1>
-          <section className="grid">
-            {planetList.map((item, index) => (
-              <Card
-                key={`${index}-${item.name}`}
-                image={getImagePath(item.name, imageBasePath)}
-              >
-                <PlanetInfo item={item} />
-              </Card>
-            ))}
-          </section>
-          <Pagination count={data.count} page={page} setPage={setPage} />
-        </>
-      )}
+      <h1>Planets</h1>
+      <section className="cards-grid">
+        {planetList.map((item, index) => (
+          <Card
+            key={`${index}-${item.name}`}
+            image={getImagePath(item.name, imageBasePath)}
+          >
+            <PlanetInfo item={item} />
+          </Card>
+        ))}
+      </section>
+      <Pagination count={data.count} page={page} setPage={setPage} />
     </Container>
   );
 };

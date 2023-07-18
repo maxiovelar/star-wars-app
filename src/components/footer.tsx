@@ -5,12 +5,13 @@ import { GithubIcon } from "./icons/github-icon";
 
 export const Footer = () => {
   return (
-    <footer className={styles.footer}>
+    <footer data-testid="footer" className={styles.footer}>
       <section className={styles.footer__social}>
         <p>
           Designed and built by <b>Maxi Ovelar</b>
         </p>
         <a
+          data-testid="linkedin-link"
           href="https://www.linkedin.com/in/maximiliano-ovelar/"
           target="_blank"
           rel="noopener noreferrer"
@@ -22,6 +23,7 @@ export const Footer = () => {
           />
         </a>
         <a
+          data-testid="github-link"
           href="https://github.com/maxiovelar"
           target="_blank"
           rel="noopener noreferrer"
@@ -36,6 +38,7 @@ export const Footer = () => {
       <p>
         Powered by &nbsp;
         <a
+          data-testid="swapi-link"
           href="https://swapi.dev/"
           target="_blank"
           rel="noreferrer"
@@ -44,7 +47,7 @@ export const Footer = () => {
           swapi.dev
         </a>
       </p>
-      <p>
+      <p data-testid="current-year">
         Copyright © {new Date().getFullYear()} Maxi Ovelar. All Rights Reserved
       </p>
     </footer>
