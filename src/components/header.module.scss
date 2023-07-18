@@ -4,11 +4,16 @@
   display: flex;
   justify-content: center;
   padding: 20px 0px;
-  border-bottom: solid 2px #FFC500;
+  border-bottom: solid 2px #ffc500;
 
   &__icon {
     height: 100px;
     width: 200px;
+    transition: all 0.5s;
+
+    &:hover {
+      transform: scale(0.96);
+    }
   }
 }
 

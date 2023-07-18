@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import styles from "./navigation.module.scss";
 import cx from "classnames";
 import { PlanetsIcon } from "./icons/planets-icon";

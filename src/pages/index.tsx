@@ -42,7 +42,9 @@ const CollectionInfo = ({ item }: CollectionInfoProps) => {
   return (
     <>
       <p>{item.name}</p>
-      <Link href={item.href}> See more</Link>
+      <Link href={item.href} className="home-card-link">
+        See more
+      </Link>
     </>
   );
 };
