@@ -1,5 +1,5 @@
-import { Card } from "@/components/card";
-import { Container } from "@/components/container";
+import { Card } from "../components/card/card";
+import { Container } from "../components/container/container";
 import Head from "next/head";
 import Link from "next/link";
 

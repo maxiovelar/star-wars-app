@@ -1,5 +1,5 @@
 import React from "react";
-import { StarWarsIcon } from "./icons/star-wars-icon";
+import { StarWarsIcon } from "../icons/star-wars-icon";
 import styles from "./header.module.scss";
 import Link from "next/link";
 

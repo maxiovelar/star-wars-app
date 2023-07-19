@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Card } from "@/components/card";
-import { getImagePath } from "@/utils/helpers";
-import { Container } from "@/components/container";
-import { Pagination } from "@/components/pagination";
+import { Card } from "../components/card";
+import { getImagePath } from "../utils/helpers";
+import { Container } from "../components/container";
+import { Pagination } from "../components/pagination";
 
 const imageBasePath = "/assets/planets/";
 
-interface Planet {
+export interface Planet {
   name: string;
   diameter: string;
   climate: string;
   population: string;
 }
 
-interface QueryResponse {
+export interface PlanetsQueryResponse {
   data: {
     count: number;
     next: string;
@@ -44,7 +44,7 @@ const PlanetInfo = ({ item }: PlanetInfoProps) => {
   );
 };
 
-const PlanetsPage = ({ data }: QueryResponse) => {
+const PlanetsPage = ({ data }: PlanetsQueryResponse) => {
   const [planetList, setPlanetList] = useState(data.results);
   const [page, setPage] = useState(1);
   const apiURL = `${process.env.NEXT_PUBLIC_API_URL}planets?page=${page}`;

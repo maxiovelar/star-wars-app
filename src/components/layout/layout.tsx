@@ -1,8 +1,8 @@
 import React, { ReactNode } from "react";
 import styles from "./layout.module.scss";
-import { Navigation } from "./navigation";
-import { Header } from "./header";
-import { Footer } from "./footer";
+import { Navigation } from "../navigation/navigation";
+import { Header } from "../header/header";
+import { Footer } from "../footer/footer";
 
 export interface LayoutProps {
   children: ReactNode;

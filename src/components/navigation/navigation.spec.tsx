@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Navigation } from "./navigation";
-import * as hooks from "../hooks/useViewportWidth";
+import * as hooks from "../../hooks/useViewportWidth";
 
 describe("<Navigation />", () => {
   it("should render", () => {

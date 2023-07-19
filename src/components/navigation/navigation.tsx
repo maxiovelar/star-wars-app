@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import styles from "./navigation.module.scss";
 import cx from "classnames";
-import { PlanetsIcon } from "./icons/planets-icon";
-import { SpaceShipIcon } from "./icons/space-ship-icon";
-import { VehiclesIcon } from "./icons/vehicles-icon";
-import { PeopleIcon } from "./icons/people-icon";
-import { FilmsIcon } from "./icons/films-icon";
-import { SpeciesIcon } from "./icons/species-icon";
+import { PlanetsIcon } from "../icons/planets-icon";
+import { SpaceShipIcon } from "../icons/space-ship-icon";
+import { VehiclesIcon } from "../icons/vehicles-icon";
+import { PeopleIcon } from "../icons/people-icon";
+import { FilmsIcon } from "../icons/films-icon";
+import { SpeciesIcon } from "../icons/species-icon";
 import Link from "next/link";
-import { ArrowRightIcon } from "./icons/arrow-right-icon";
-import { useViewportWidth } from "../hooks/useViewportWidth";
+import { ArrowRightIcon } from "../icons/arrow-right-icon";
+import { useViewportWidth } from "../../hooks/useViewportWidth";
 
 const categories = [
   {

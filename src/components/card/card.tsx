@@ -12,7 +12,7 @@ export interface CardProps {
 export const Card = ({ image = defaultImage, children }: CardProps) => {
   const [src, setSrc] = useState(image);
   return (
-    <article className={styles.card}>
+    <article data-testid="card" className={styles.card}>
       <div className={styles["card__image-wrapper"]}>
         <Image
           data-testid="card-image"
