@@ -6,7 +6,7 @@ describe("<Navigation />", () => {
   it("should render", () => {
     render(<Navigation />);
     expect(screen.getByTitle(/planets/i)).toBeInTheDocument();
-    expect(screen.getByTitle(/spaceships/i)).toBeInTheDocument();
+    expect(screen.getByTitle(/starships/i)).toBeInTheDocument();
     expect(screen.getByTitle(/vehicles/i)).toBeInTheDocument();
     expect(screen.getByTitle(/people/i)).toBeInTheDocument();
     expect(screen.getByTitle(/species/i)).toBeInTheDocument();

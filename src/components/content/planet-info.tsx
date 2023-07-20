@@ -1,3 +1,6 @@
+import { getImagePath } from "../../utils/helpers";
+import { Card } from "../card/card";
+
 const imageBasePath = "/assets/planets/";
 
 export interface Planet {
@@ -11,9 +14,9 @@ interface PlanetInfoProps {
   item: Planet;
 }
 
-const PlanetInfo = ({ item }: PlanetInfoProps) => {
+export const PlanetInfo = ({ item }: PlanetInfoProps) => {
   return (
-    <>
+    <Card key={`${item.name}`} image={getImagePath(item.name, imageBasePath)}>
       <p>{item.name}</p>
       <span>
         <b>Diameter:</b> {item.diameter}
@@ -24,8 +27,6 @@ const PlanetInfo = ({ item }: PlanetInfoProps) => {
       <span>
         <b>Population:</b> {item.population}
       </span>
-    </>
+    </Card>
   );
 };
-
-export default PlanetInfo;

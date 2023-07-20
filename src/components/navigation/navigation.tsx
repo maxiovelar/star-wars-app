@@ -14,32 +14,32 @@ import { useViewportWidth } from "../../hooks/useViewportWidth";
 const categories = [
   {
     name: "Planets",
-    href: "/planets",
+    href: "planets",
     icon: <PlanetsIcon height={25} width={25} />,
   },
   {
-    name: "Spaceships",
-    href: "/spaceships",
+    name: "Starships",
+    href: "starships",
     icon: <SpaceShipIcon height={25} width={25} />,
   },
   {
     name: "Vehicles",
-    href: "/vehicles",
+    href: "vehicles",
     icon: <VehiclesIcon height={25} width={25} />,
   },
   {
     name: "People",
-    href: "/people",
+    href: "people",
     icon: <PeopleIcon height={25} width={25} />,
   },
   {
     name: "Films",
-    href: "/films",
+    href: "films",
     icon: <FilmsIcon height={25} width={25} />,
   },
   {
     name: "Species",
-    href: "/species",
+    href: "species",
     icon: <SpeciesIcon height={25} width={25} />,
   },
 ];
@@ -50,7 +50,7 @@ const MobileNavigation = () => {
       <ul className={styles.mobile__list}>
         {categories.map((category) => (
           <li key={category.name}>
-            <Link href={category.href} title={category.name}>
+            <Link href={`/collections/${category.href}`} title={category.name}>
               {category.icon}
             </Link>
           </li>
@@ -80,7 +80,7 @@ const DesktopNavigation = () => {
         {categories.map((category) => (
           <li key={category.name} className={styles["list-item"]}>
             <Link
-              href={category.href}
+              href={`/collections/${category.href}`}
               title={category.name}
               className={styles["list-item__link"]}
             >

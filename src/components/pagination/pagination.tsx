@@ -1,65 +1,88 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./pagination.module.scss";
 import cx from "classnames";
+import Link from "next/link";
+import { CollectionType } from "../../pages/collections/[collection]";
+import { useStore } from "../../hooks/useStore";
 
 export interface PaginationProps {
   count: number;
-  page: number;
-  setPage: (page: number) => void;
+  collection: CollectionType;
 }
 
-export const Pagination = ({ count = 80, page, setPage }: PaginationProps) => {
+export const Pagination = ({ count = 80, collection }: PaginationProps) => {
+  const { currentPage, setCurrentPage } = useStore();
   const pagesCount = Math.floor(count / 10);
   const pages = [...Array(pagesCount)];
 
-  const isActive = (index: number) => page === index + 1;
+  const isActive = (index: number) => currentPage === index + 1;
+
+  useEffect(() => {
+    setCurrentPage(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [collection]);
 
   const handleDecrease = () => {
-    if (page > 1) {
-      setPage(page - 1);
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
     }
   };
 
   const handleIncrease = () => {
-    if (page < pagesCount) {
-      setPage(page + 1);
+    if (currentPage < pagesCount) {
+      setCurrentPage(currentPage + 1);
     }
   };
 
   const handleClick = (index: number) => {
-    setPage(index + 1);
+    setCurrentPage(index + 1);
   };
 
   return (
     pagesCount > 0 && (
       <div className={styles.pagination}>
-        <button
+        <Link
           data-testid="pagination-button-decrease"
-          disabled={page === 1}
+          href={{
+            pathname: `${collection}`,
+            query: { page: currentPage - 1 },
+          }}
           onClick={handleDecrease}
-          className={styles.pagination__button}
+          className={cx(styles.pagination__link, {
+            [styles["pagination__link--disabled"]]: currentPage === 1,
+          })}
         >
           &laquo;
-        </button>
+        </Link>
         {pages.map((_, index) => (
-          <button
+          <Link
             key={index}
+            data-testid="pagination-button"
+            href={{
+              pathname: `${collection}`,
+              query: { page: index + 1 },
+            }}
             onClick={() => handleClick(index)}
-            className={cx(styles.pagination__button, {
-              [styles["pagination__button--active"]]: isActive(index),
+            className={cx(styles.pagination__link, {
+              [styles["pagination__link--active"]]: isActive(index),
             })}
           >
             {index + 1}
-          </button>
+          </Link>
         ))}
-        <button
+        <Link
           data-testid="pagination-button-increase"
-          disabled={page === pagesCount}
+          href={{
+            pathname: `${collection}`,
+            query: { page: currentPage + 1 },
+          }}
           onClick={handleIncrease}
-          className={styles.pagination__button}
+          className={cx(styles.pagination__link, {
+            [styles["pagination__link--disabled"]]: currentPage === pagesCount,
+          })}
         >
           &raquo;
-        </button>
+        </Link>
       </div>
     )
   );

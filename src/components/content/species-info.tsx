@@ -1,3 +1,6 @@
+import { getImagePath } from "../../utils/helpers";
+import { Card } from "../card/card";
+
 const imageBasePath = "/assets/species/";
 
 export interface Species {
@@ -11,9 +14,9 @@ interface SpeciesInfoProps {
   item: Species;
 }
 
-const SpeciesInfo = ({ item }: SpeciesInfoProps) => {
+export const SpeciesInfo = ({ item }: SpeciesInfoProps) => {
   return (
-    <>
+    <Card key={`${item.name}`} image={getImagePath(item.name, imageBasePath)}>
       <p>{item.name}</p>
       <span>
         <b>Classification:</b> {item.classification}
@@ -24,8 +27,6 @@ const SpeciesInfo = ({ item }: SpeciesInfoProps) => {
       <span>
         <b>Language:</b> {item.language}
       </span>
-    </>
+    </Card>
   );
 };
-
-export default SpeciesInfo;

@@ -5,21 +5,23 @@
   padding-bottom: 60px;
   gap: 6px;
 
-  &__button {
+  &__link {
     color: black;
     height: 40px;
     padding: 8px 16px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
+
+    &--disabled {
+      pointer-events: none;
+      opacity: 40%;
+    }
 
     &:hover:not(.active) {
       background-color: #ddd;
       border-radius: 5px;
-    }
-
-    &:disabled {
-      pointer-events: none;
     }
 
     &--active {

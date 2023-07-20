@@ -6,7 +6,7 @@ describe("<Index />", () => {
     render(<Index />);
     expect(screen.getByText(/collections/i)).toBeInTheDocument();
     expect(screen.getByText(/planets/i)).toBeInTheDocument();
-    expect(screen.getByText(/spaceships/i)).toBeInTheDocument();
+    expect(screen.getByText(/starships/i)).toBeInTheDocument();
     expect(screen.getByText(/vehicles/i)).toBeInTheDocument();
     expect(screen.getByText(/films/i)).toBeInTheDocument();
     expect(screen.getByText(/people/i)).toBeInTheDocument();

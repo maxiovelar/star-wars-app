@@ -14,27 +14,27 @@ interface CollectionInfoProps {
 }
 
 const collections = [
-  { name: "Planets", image: "/assets/planets/tatooine.webp", href: "/planets" },
+  { name: "Planets", image: "/assets/planets/tatooine.webp", href: "planets" },
   {
-    name: "Spaceships",
-    image: "/assets/spaceships/star-destroyer.webp",
-    href: "/spaceships",
+    name: "Starships",
+    image: "/assets/starships/star-destroyer.webp",
+    href: "starships",
   },
-  { name: "Vehicles", image: "/assets/vehicles/at-at.webp", href: "/vehicles" },
+  { name: "Vehicles", image: "/assets/vehicles/at-at.webp", href: "vehicles" },
   {
     name: "People",
     image: "/assets/people/luke-skywalker.webp",
-    href: "/people",
+    href: "people",
   },
   {
     name: "Films",
     image: "/assets/films/return-of-the-jedi.webp",
-    href: "/films",
+    href: "films",
   },
   {
     name: "Species",
     image: "/assets/species/yoda's-species.webp",
-    href: "/species",
+    href: "species",
   },
 ];
 
@@ -42,7 +42,7 @@ const CollectionInfo = ({ item }: CollectionInfoProps) => {
   return (
     <>
       <p>{item.name}</p>
-      <Link href={item.href} className="home-card-link">
+      <Link href={`/collections/${item.href}`} className="home-card-link">
         See more
       </Link>
     </>
