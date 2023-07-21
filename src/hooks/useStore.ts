@@ -1,11 +1,11 @@
 import { useReducer } from "react";
 
-interface State {
+export interface State {
   currentPage: number;
   isLoading: boolean;
 }
 
-type Action =
+export type Action =
   | { type: "SET_CURRENT_PAGE"; payload: number }
   | { type: "SET_IS_LOADING"; payload: boolean };
 
@@ -16,12 +16,15 @@ const initialState: State = {
 };
 
 // 2. Create a reducer function
-const reducer = (state: State, action: Action) => {
+export const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "SET_CURRENT_PAGE":
+      if (typeof action.payload !== "number" || action.payload < 0)
+        return state;
       return { ...state, currentPage: action.payload };
 
     case "SET_IS_LOADING":
+      if (typeof action.payload !== "boolean") return state;
       return { ...state, isLoading: action.payload };
 
     default:
