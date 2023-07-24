@@ -1,12 +1,8 @@
+import { type Vehicle } from "../../../types";
 import { getImagePath } from "../../utils/helpers";
 import { Card } from "../card/card";
 
 const imageBasePath = "/assets/vehicles/";
-
-export interface Vehicle {
-  name: string;
-  vehicle_class: string;
-}
 
 interface VehicleInfoProps {
   item: Vehicle;

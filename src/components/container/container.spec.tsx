@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
-import { Container, ContainerProps } from "./container";
+import { Container } from "./container";
+import { type ContainerProps } from "../../../types";
 
 describe("<Container />", () => {
   let props: ContainerProps;

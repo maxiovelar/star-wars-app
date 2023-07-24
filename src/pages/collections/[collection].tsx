@@ -1,42 +1,28 @@
 import React, { useEffect } from "react";
+import { GetServerSideProps } from "next";
 import axios from "axios";
 import { Container } from "../../components/container/container";
 import { Pagination } from "../../components/pagination/pagination";
 import {
-  Film,
-  Person,
-  Planet,
   PlanetInfo,
   StarshipInfo,
   VehicleInfo,
   FilmInfo,
   PersonInfo,
   SpeciesInfo,
-  Starship,
-  Species,
-  Vehicle,
 } from "../../components/content";
-import { GetServerSideProps } from "next";
+import {
+  type QueryResponse,
+  type CollectionType,
+  type Planet,
+  type Starship,
+  type Vehicle,
+  type Person,
+  type Film,
+  type Species,
+} from "../../../types";
 
 type ItemType = Planet | Starship | Vehicle | Person | Film | Species;
-
-export type CollectionType =
-  | "planets"
-  | "starships"
-  | "vehicles"
-  | "people"
-  | "films"
-  | "species";
-
-export interface QueryResponse {
-  data: {
-    count: number;
-    next: string;
-    previous: string;
-    results: ItemType[];
-  };
-  collection: CollectionType;
-}
 
 interface ItemInfoProps {
   collection: CollectionType;

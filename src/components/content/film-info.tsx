@@ -1,14 +1,8 @@
+import { type Film } from "../../../types";
 import { getImagePath } from "../../utils/helpers";
 import { Card } from "../card/card";
 
 const imageBasePath = "/assets/films/";
-
-export interface Film {
-  title: string;
-  episode_id: number;
-  release_date: string;
-  director: string;
-}
 
 interface FilmInfoProps {
   item: Film;

@@ -1,14 +1,8 @@
+import { type Species } from "../../../types";
 import { getImagePath } from "../../utils/helpers";
 import { Card } from "../card/card";
 
 const imageBasePath = "/assets/species/";
-
-export interface Species {
-  name: string;
-  classification: string;
-  designation: string;
-  language: string;
-}
 
 interface SpeciesInfoProps {
   item: Species;

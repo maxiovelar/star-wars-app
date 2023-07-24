@@ -1,12 +1,8 @@
+import { type Starship } from "../../../types";
 import { getImagePath } from "../../utils/helpers";
 import { Card } from "../card/card";
 
 const imageBasePath = "/assets/starships/";
-
-export interface Starship {
-  name: string;
-  starship_class: string;
-}
 
 interface StarshipInfoProps {
   item: Starship;

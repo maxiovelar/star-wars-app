@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { Card, CardProps } from "./card";
+import { Card } from "./card";
+import { type CardProps } from "../../../types";
 
 describe("<Card />", () => {
   let props: CardProps;

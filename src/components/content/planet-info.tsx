@@ -1,14 +1,8 @@
+import { type Planet } from "../../../types";
 import { getImagePath } from "../../utils/helpers";
 import { Card } from "../card/card";
 
 const imageBasePath = "/assets/planets/";
-
-export interface Planet {
-  name: string;
-  diameter: string;
-  climate: string;
-  population: string;
-}
 
 interface PlanetInfoProps {
   item: Planet;

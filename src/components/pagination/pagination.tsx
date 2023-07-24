@@ -2,13 +2,8 @@ import React, { useEffect } from "react";
 import styles from "./pagination.module.scss";
 import cx from "classnames";
 import Link from "next/link";
-import { CollectionType } from "../../pages/collections/[collection]";
 import { useStore } from "../../hooks/useStore";
-
-export interface PaginationProps {
-  count: number;
-  collection: CollectionType;
-}
+import { type PaginationProps } from "../../../types";
 
 export const Pagination = ({ count = 80, collection }: PaginationProps) => {
   const { currentPage, setCurrentPage } = useStore();

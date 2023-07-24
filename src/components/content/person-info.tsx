@@ -1,14 +1,8 @@
+import { type Person } from "../../../types";
 import { getImagePath } from "../../utils/helpers";
 import { Card } from "../card/card";
 
 const imageBasePath = "/assets/people/";
-
-export interface Person {
-  name: string;
-  height: string;
-  mass: string;
-  gender: string;
-}
 
 interface PersonInfoProps {
   item: Person;

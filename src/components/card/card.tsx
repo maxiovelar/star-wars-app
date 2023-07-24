@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import styles from "./card.module.scss";
 import Image from "next/image";
+import { type CardProps } from "../../../types";
 
 const defaultImage = "/assets/starwars.png";
-
-export interface CardProps {
-  image?: string;
-  children: React.ReactNode;
-}
 
 export const Card = ({ image = defaultImage, children }: CardProps) => {
   const [src, setSrc] = useState(image);

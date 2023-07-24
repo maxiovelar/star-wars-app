@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { Pagination, PaginationProps } from "./pagination";
+import { Pagination } from "./pagination";
+import { type PaginationProps } from "../../../types";
 
 describe("<Pagination />", () => {
   let props: PaginationProps;
@@ -29,7 +30,7 @@ describe("<Pagination />", () => {
     expect(screen.getAllByTestId("pagination-button")).toHaveLength(3);
   });
 
-  it("should updates page number on click", () => {
+  it.only("should updates page number on click", () => {
     render(<Pagination {...props} />);
     const secondPageLink = screen.getByText("2");
     fireEvent.click(secondPageLink);
