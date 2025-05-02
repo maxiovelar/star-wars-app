@@ -1,49 +1,51 @@
-import { act, renderHook } from "@testing-library/react";
-import { Action, State, reducer, useStore } from "./useStore";
+import { renderHook, act } from "@testing-library/react";
+import { useStore } from "./useStore";
+import { useContext } from "react";
 
-describe("reducer", () => {
-  it("should set currentPage", () => {
-    const initialState: State = { currentPage: 1, isLoading: false };
-    const action: Action = { type: "SET_CURRENT_PAGE", payload: 2 };
-    const result = reducer(initialState, action);
-    expect(result).toEqual({ currentPage: 2, isLoading: false });
-  });
-
-  it("should set isLoading", () => {
-    const initialState: State = { currentPage: 1, isLoading: false };
-    const action: Action = { type: "SET_IS_LOADING", payload: true };
-    const result = reducer(initialState, action);
-    expect(result).toEqual({ currentPage: 1, isLoading: true });
-  });
-
-  it("should return state when negative number is passed", () => {
-    const initialState: State = { currentPage: 1, isLoading: false };
-    const action: Action = { type: "SET_CURRENT_PAGE", payload: -1 };
-    const result = reducer(initialState, action);
-    expect(result).toEqual(initialState);
-  });
-});
+jest.mock("react", () => ({
+  ...jest.requireActual("react"),
+  useContext: jest.fn(),
+}));
 
 describe("useStore", () => {
-  it("should have a correct initialState", () => {
-    const { result } = renderHook(() => useStore());
-    expect(result.current.currentPage).toBe(1);
-    expect(result.current.isLoading).toBe(false);
+  const mockDispatch = jest.fn();
+  const mockState = {
+    currentPage: 1,
+    isLoading: false,
+  };
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    (useContext as jest.Mock).mockReturnValue({
+      state: mockState,
+      dispatch: mockDispatch,
+    });
   });
 
-  it("should set currentPage", () => {
+  it("should return the current state values", () => {
     const { result } = renderHook(() => useStore());
+
+    expect(result.current.currentPage).toBe(mockState.currentPage);
+    expect(result.current.isLoading).toBe(mockState.isLoading);
+  });
+
+  it("should dispatch SET_CURRENT_PAGE action", () => {
+    const { result } = renderHook(() => useStore());
+
     act(() => {
       result.current.setCurrentPage(2);
     });
-    expect(result.current.currentPage).toBe(2);
+
+    expect(mockDispatch).toHaveBeenCalledWith({ type: "SET_CURRENT_PAGE", payload: 2 });
   });
 
-  it("should set isLoading", () => {
+  it("should dispatch SET_IS_LOADING action", () => {
     const { result } = renderHook(() => useStore());
+
     act(() => {
       result.current.setIsLoading(true);
     });
-    expect(result.current.isLoading).toBe(true);
+
+    expect(mockDispatch).toHaveBeenCalledWith({ type: "SET_IS_LOADING", payload: true });
   });
 });

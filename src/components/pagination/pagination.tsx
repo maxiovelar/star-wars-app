@@ -49,22 +49,25 @@ export const Pagination = ({ count = 80, collection }: PaginationProps) => {
         >
           &laquo;
         </Link>
-        {pages.map((_, index) => (
-          <Link
-            key={index}
-            data-testid="pagination-button"
-            href={{
-              pathname: `${collection}`,
-              query: { page: index + 1 },
-            }}
-            onClick={() => handleClick(index)}
-            className={cx(styles.pagination__link, {
-              [styles["pagination__link--active"]]: isActive(index),
-            })}
-          >
-            {index + 1}
-          </Link>
-        ))}
+        {pages.map((_, index) => {
+          const key = `page-${index}`;
+          return (
+            <Link
+              key={key}
+              data-testid="pagination-button"
+              href={{
+                pathname: `${collection}`,
+                query: { page: index + 1 },
+              }}
+              onClick={() => handleClick(index)}
+              className={cx(styles.pagination__link, {
+                [styles["pagination__link--active"]]: isActive(index),
+              })}
+            >
+              {index + 1}
+            </Link>
+          );
+        })}
         <Link
           data-testid="pagination-button-increase"
           href={{
